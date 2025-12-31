@@ -1,0 +1,15 @@
+/* ========================= */
+/*  Copyright (c) AJ-Holzer  */
+/*  All rights reserved      */
+/* ========================= */
+
+
+:root {
+    --bg: #0b0f14;
+    --bg-soft: #121821;
+    --text: #e6eaf0;
+    --text-muted: #9aa4b2;
+    --accent: #4fd1c5;
+
+    --glow: rgba(79, 209, 197, 0.15);
+}

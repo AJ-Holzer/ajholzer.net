@@ -1,0 +1,18 @@
+/* ========================= */
+/*  Copyright (c) AJ-Holzer  */
+/*  All rights reserved      */
+/* ========================= */
+
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.8s ease forwards;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
