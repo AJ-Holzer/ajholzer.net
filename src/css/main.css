@@ -177,11 +177,6 @@ h3,
     transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.social-links a:hover {
-    color: var(--accent);
-    transform: translateY(-3px);
-}
-
 .accent {
     color: var(--accent);
 }
@@ -220,11 +215,6 @@ h3,
     border-radius: 0.5rem;
 
     transition: transform 0.25s ease, background-color 0.25s ease;
-}
-
-.projects .project:hover {
-    transform: translateX(12px);
-    background-color: rgba(255, 255, 255, 0.04);
 }
 
 .projects .project.header {
@@ -378,7 +368,6 @@ h3,
         grid-template-columns: 1fr;
         row-gap: 0.25rem;
         padding: 0.75rem 0;
-        pointer-events: none;
         justify-content: center;
     }
 
@@ -397,5 +386,21 @@ h3,
 
     .projects .project .commit-count {
         display: none;
+    }
+}
+
+/* Hover animations */
+@media (hover: hover) and (pointer: fine) {
+
+    /* Projects */
+    .projects .project:hover {
+        transform: translateX(12px);
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Social links */
+    .social-links a:hover {
+        color: var(--accent);
+        transform: translateY(-3px);
     }
 }
