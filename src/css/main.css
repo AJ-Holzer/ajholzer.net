@@ -269,6 +269,10 @@ h3,
         gap: 0;
     }
 
+    .hero h1 {
+        text-align: center;
+    }
+
     #about {
         flex-direction: column;
         gap: 0;
