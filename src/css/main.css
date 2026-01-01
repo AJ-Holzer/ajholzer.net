@@ -195,7 +195,7 @@ div#about {
         gap: 0;
     }
 
-    section#about {
+    div#about {
         flex-direction: column;
         gap: 0;
     }
