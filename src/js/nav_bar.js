@@ -40,20 +40,11 @@ function closeMenu() {
 // --------------------------
 let lastScroll = 0;
 
-// Get the CSS variable value for navbar height in rem
-let navbarHeightRem =
-  getComputedStyle(document.documentElement).getPropertyValue(
-    "--navbar-height"
-  ) || "5rem"; // fallback
-
-// Convert rem to pixels
-const rootFontSize = parseFloat(
-  getComputedStyle(document.documentElement).fontSize
-); // usually 16px
-const navbarHeightPx = parseFloat(navbarHeightRem) * rootFontSize;
-
 window.addEventListener("scroll", () => {
   const currentScroll = window.scrollY;
+
+  // Use the actual navbar height in pixels (works for desktop + mobile)
+  const navbarHeightPx = navbar.offsetHeight;
 
   if (currentScroll <= 0) {
     // At the very top → show navbar
