@@ -14,11 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.createElement("div");
     header.className = "project header";
     header.innerHTML = `
-      <div>Project</div>
-      <div>Description</div>
-      <div class="commit-header">Commits</div>
-    `;
+    <div>Project</div>
+    <div>Description</div>
+    <div class="commit-header">Commits</div>
+  `;
+
     container.appendChild(header);
+    observeReveal(header);
   }
 
   /* -------------------------
@@ -51,7 +53,29 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
 
     container.appendChild(row);
+    observeReveal(row);
+
     return row;
+  }
+
+  const revealElements = new Set();
+
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.classList.add("is-visible");
+          obs.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  function observeReveal(el) {
+    el.classList.add("reveal");
+    revealObserver.observe(el);
   }
 
   function renderPlaceholders() {
