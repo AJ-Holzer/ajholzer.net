@@ -10,6 +10,16 @@
 /* Import Font Awesome */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
 
+/* Change selection color */
+::-moz-selection {
+    background: var(--glow);
+}
+
+::selection {
+    background: var(--glow);
+}
+
+/* html and body elements */
 html {
     height: 100%;
 }
@@ -30,7 +40,6 @@ body {
     text-rendering: optimizeLegibility;
     letter-spacing: -0.01em;
 }
-
 
 /* Make headings slightly heavier */
 h1,
