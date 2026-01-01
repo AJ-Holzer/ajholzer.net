@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Quadrupedal robot with encrypted WiFi control.",
     },
     {
-      name: "Chatlex",
+      name: "CHATLEX",
       description: "Secure messaging application with local encryption.",
     },
   ];
