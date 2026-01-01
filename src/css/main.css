@@ -42,6 +42,13 @@ body {
     letter-spacing: -0.01em;
 }
 
+footer {
+    justify-items: center;
+    padding: 2rem;
+    background: var(--transparent-background-color);
+    box-shadow: 4px 0 20px var(--box-shadow-color);
+}
+
 /* Make headings slightly heavier */
 h1,
 h2,
@@ -58,6 +65,14 @@ h3,
     z-index: -1;
 }
 
+.logo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: var(--text);
+}
+
 /* Navbar */
 .navbar {
     position: fixed;
@@ -70,19 +85,11 @@ h3,
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
-    background: rgba(18, 24, 33, 0.95);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+    background: var(--transparent-background-color);
+    box-shadow: 4px 0 20px var(--box-shadow-color);
     z-index: 1001;
     box-sizing: border-box;
     transition: top 0.3s ease;
-}
-
-.logo {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    color: var(--text);
 }
 
 .navbar nav a {
@@ -195,13 +202,14 @@ h3,
 
 /* Site content */
 .content {
-    padding: 0 25vw;
+    padding: 0 25vw 10rem 25vw;
+    gap: 5rem;
 }
 
 /* Projects */
 .projects {
     display: grid;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .projects .project {
@@ -242,9 +250,44 @@ h3,
 
 .projects .project .commit-count {
     text-align: right;
+    align-self: center;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
+}
+
+/* Footer table */
+footer table {
+    border-collapse: separate;
+    border-spacing: 3rem 0;
+    width: 100%;
+    max-width: 50%;
+}
+
+footer table thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: larger;
+    color: var(--accent);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+footer table tbody td {
+    padding: 0.5rem 0;
+    color: var(--text-muted);
+    vertical-align: top;
+}
+
+footer table tbody td a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer table tbody tr {
+    transition: background-color 0.25s ease;
+    border-radius: 0.3rem;
 }
 
 /* Phone view */
@@ -387,6 +430,13 @@ h3,
     .projects .project .commit-count {
         display: none;
     }
+
+    /* Footer table */
+    footer table {
+        border-spacing: 1rem 0.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 /* Hover animations */
@@ -402,5 +452,10 @@ h3,
     .social-links a:hover {
         color: var(--accent);
         transform: translateY(-3px);
+    }
+
+    /* Footer table */
+    footer table tbody td a:hover {
+        color: var(--accent);
     }
 }

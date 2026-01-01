@@ -14,6 +14,13 @@
 
     /* Special colors */
     --glow: rgba(79, 209, 197, 0.15);
+    --transparent-background-color: rgba(18, 24, 33, 0.95);
+
+    /* Box shadow colors */
+    --box-shadow-color: rgba(0, 0, 0, 0.5);
+
+    /* Border stuff */
+    --border-radius: 10px;
 
     /* Navbar */
     --navbar-height: 4.5rem;
