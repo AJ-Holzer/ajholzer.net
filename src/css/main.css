@@ -283,10 +283,10 @@ div#about {
         pointer-events: none;
         transition: opacity 0.3s ease;
         z-index: 999;
-        pointer-events: auto;
     }
 
     .nav-overlay.open {
         opacity: 1;
+        pointer-events: auto;
     }
 }
