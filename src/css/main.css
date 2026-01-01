@@ -253,6 +253,11 @@ h3,
     white-space: nowrap;
 }
 
+.projects .project.header * {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
 /* Footer table */
 footer table {
     border-collapse: separate;
