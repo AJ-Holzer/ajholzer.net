@@ -2,8 +2,10 @@
 
 ## ⚖️ License
 
+```text
 Copyright (c) AJ-Holzer
 All rights reserved.
+```
 
 ### TL;DR:
 
