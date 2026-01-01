@@ -43,10 +43,11 @@ body {
 }
 
 footer {
-    justify-items: center;
-    padding: 2rem;
+    padding: 1rem 5vw;
     background: var(--transparent-background-color);
     box-shadow: 4px 0 20px var(--box-shadow-color);
+    display: flex;
+    justify-content: center;
 }
 
 /* Make headings slightly heavier */
@@ -97,10 +98,6 @@ h3,
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.2s ease;
-}
-
-.navbar nav a:hover {
-    color: var(--accent);
 }
 
 .nav-toggle {
@@ -442,6 +439,11 @@ footer table tbody tr {
 
 /* Hover animations */
 @media (hover: hover) and (pointer: fine) {
+
+    /* Navbar */
+    .navbar nav a:hover {
+        color: var(--accent);
+    }
 
     /* Projects */
     .projects .project:hover {
