@@ -48,6 +48,7 @@ h2,
 h3,
 .logo {
     font-weight: 600;
+    text-align: center;
 }
 
 /* Background */
@@ -57,7 +58,6 @@ h3,
     z-index: -1;
 }
 
-/* Navbar */
 /* Navbar */
 .navbar {
     position: fixed;
@@ -139,7 +139,7 @@ h3,
     min-height: 100vh;
 }
 
-div#about {
+#about {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -154,6 +154,7 @@ div#about {
 .hero-text h1 {
     font-size: 3.2rem;
     margin-bottom: 1rem;
+    text-align: left;
 }
 
 .hero-text p {
@@ -197,8 +198,69 @@ div#about {
     box-shadow: 0 0 40px var(--glow);
 }
 
+/* Site content */
+.content {
+    padding: 0 25vw;
+}
+
+/* Projects */
+.projects {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.projects .project {
+    display: grid;
+    column-gap: 3rem;
+    grid-template-columns: 12rem 1fr 8rem;
+    align-items: start;
+    text-decoration: none;
+
+    padding: 0.2rem 1rem;
+    border-radius: 0.5rem;
+
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.projects .project:hover {
+    transform: translateX(12px);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.projects .project.header {
+    font-weight: 600;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.projects .project.header .commit-header {
+    text-align: right;
+}
+
+.projects .project .title {
+    display: flex;
+    align-self: center;
+    font-weight: 600;
+    opacity: 0.8;
+    white-space: nowrap;
+    color: var(--accent);
+}
+
+.projects .project .description {
+    color: var(--text);
+}
+
+.projects .project .commit-count {
+    text-align: right;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
 /* Phone view */
 @media (max-width: 768px) {
+
+    /* Hero */
     .hero {
         flex-direction: column;
         text-align: center;
@@ -207,9 +269,10 @@ div#about {
         gap: 0;
     }
 
-    div#about {
+    #about {
         flex-direction: column;
         gap: 0;
+        padding: 1rem;
     }
 
     .hero-image {
@@ -231,6 +294,7 @@ div#about {
         margin-top: 1rem;
     }
 
+    /* Navbar */
     .nav-toggle {
         display: block;
     }
@@ -253,7 +317,7 @@ div#about {
         z-index: 1000;
     }
 
-    /* Inner wrapper to maintain padding */
+    /* Inner navbar wrapper to maintain padding */
     .nav-menu-inner {
         display: flex;
         flex-direction: column;
@@ -273,7 +337,7 @@ div#about {
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
     }
 
-    /* Overlay */
+    /* Navbar overlay */
     .nav-overlay {
         position: fixed;
         inset: 0;
@@ -287,5 +351,47 @@ div#about {
     .nav-overlay.open {
         opacity: 1;
         pointer-events: auto;
+    }
+
+    /* Site content */
+    .content {
+        padding: 0;
+    }
+
+    .content h1 {
+        text-align: center;
+        margin: 3rem 0 0 0;
+    }
+
+    /* Projects */
+    .projects {
+        padding: 0 1rem 1rem 1rem;
+    }
+
+    .projects .project {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        row-gap: 0.25rem;
+        padding: 0.75rem 0;
+        pointer-events: none;
+        justify-content: center;
+    }
+
+    .projects .project.header {
+        display: none;
+    }
+
+    .projects .project .title {
+        font-size: 1rem;
+    }
+
+    .projects .project .description {
+        text-align: center;
+        align-self: center;
+    }
+
+    .projects .project .commit-count {
+        display: none;
     }
 }
