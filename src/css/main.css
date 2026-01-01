@@ -269,6 +269,7 @@ footer table thead th {
     font-weight: 600;
     font-size: larger;
     color: var(--accent);
+    opacity: 0.6;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
