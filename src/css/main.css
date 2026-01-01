@@ -65,14 +65,16 @@ h3,
     left: 0;
     right: 0;
     width: 100%;
+    height: var(--navbar-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 3rem;
+    padding: 0 3rem;
     background: rgba(18, 24, 33, 0.95);
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
     z-index: 1001;
     box-sizing: border-box;
+    transition: top 0.3s ease;
 }
 
 .logo {
@@ -231,10 +233,6 @@ div#about {
 
     .nav-toggle {
         display: block;
-    }
-
-    .navbar {
-        padding: 1rem 1.5rem;
     }
 
     .nav-menu {
