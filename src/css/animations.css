@@ -16,3 +16,29 @@
         transform: translateY(0);
     }
 }
+
+/* Hover animations */
+@media (hover: hover) and (pointer: fine) {
+
+    /* Navbar */
+    .navbar nav a:hover {
+        color: var(--accent);
+    }
+
+    /* Projects */
+    .projects .project:hover {
+        transform: translateX(10px);
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Social links */
+    .social-links a:hover {
+        color: var(--accent);
+        transform: translateY(-3px);
+    }
+
+    /* Footer table */
+    footer table tbody td a:hover {
+        color: var(--accent);
+    }
+}
