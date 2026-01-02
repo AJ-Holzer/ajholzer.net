@@ -72,11 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ------------------------- */
   function renderHeader() {
     const header = document.createElement("div");
-    header.className = "project header";
+    header.className = "project project-header";
     header.innerHTML = `
       <div>Project</div>
       <div>Description</div>
-      <div class="commit-header">Commits</div>
+      <div class="project-commit-header">Commits</div>
     `;
     container.appendChild(header);
     observeReveal(header);
@@ -97,19 +97,17 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function createRow(name, description, commits = "—", url = "#") {
-    const row = document.createElement("a");
-    row.className = "project";
-    row.href = url;
-    row.target = "_blank";
-    row.rel = "noopener noreferrer";
+    const row = document.createElement("div");
 
     row.innerHTML = `
-      <div class="title">${name}</div>
-      <div class="description">
-        ${description || "No description available."}
-      </div>
-      <div class="commit-count">${commits}</div>
-    `;
+      <a class="project" href="${url}" target="_blank" rel="noopener noreferrer">
+        <div class="project-title">${name}</div>
+        <div class="project-description">
+          ${description || "No description available."}
+        </div>
+        <div class="project-commit-count">${commits}</div>
+      </a>
+      `;
 
     container.appendChild(row);
     observeReveal(row);
