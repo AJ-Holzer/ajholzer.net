@@ -303,6 +303,7 @@ footer table tbody tr {
         padding-top: 5rem;
         box-sizing: border-box;
         gap: 0;
+        min-height: fit-content;
     }
 
     .hero h1 {
