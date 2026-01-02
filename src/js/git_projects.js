@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=10`
+    `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`
   )
     .then((res) => {
       if (!res.ok) throw new Error("GitHub API error");
@@ -203,13 +203,13 @@ function fetchCommitCount(owner, repo, row, returnCount = false) {
     })
     .then((count) => {
       if (row) {
-        row.querySelector(".commit-count").textContent = count;
+        row.querySelector(".project-commit-count").textContent = count;
       }
       return returnCount ? count : undefined;
     })
     .catch(() => {
       if (row) {
-        row.querySelector(".commit-count").textContent = "—";
+        row.querySelector(".project-commit-count").textContent = "—";
       }
       return returnCount ? "—" : undefined;
     });
