@@ -15,10 +15,5 @@ body {
 
 a {
     color: var(--accent);
-    /* Optional: link color */
     text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
