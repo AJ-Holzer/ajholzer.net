@@ -24,6 +24,42 @@
 /* Hover animations */
 @media (hover: hover) and (pointer: fine) {
 
+    /* Links */
+    a.animated {
+        position: relative;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* underline */
+    a.animated::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.15em;
+
+        width: 100%;
+        height: 2px;
+        background-color: var(--accent);
+
+        transform: translateX(100%);
+        clip-path: inset(0 0 0 100%);
+
+        transition:
+            transform 0.35s ease,
+            clip-path 0.35s ease;
+    }
+
+    /* hover */
+    a.animated:hover::after {
+        transform: translateX(0);
+        clip-path: inset(0 0 0 0);
+    }
+
+    a.animated:not(:hover)::after {
+        transform: translateX(-100%);
+    }
+
     /* Navbar */
     .navbar nav a:hover {
         color: var(--accent);
