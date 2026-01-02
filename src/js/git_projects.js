@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`
+    `https://api.github.com/users/${username}/repos?sort=updated&per_page=10`
   )
     .then((res) => {
       if (!res.ok) throw new Error("GitHub API error");
