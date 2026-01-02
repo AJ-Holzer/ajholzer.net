@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/aj_holzer
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://ajholzer.net
+  * I am aj_holzer (https://keybase.io/aj_holzer) on keybase.
+  * I have a public key ASD8RY_wWkfZCFCDt4x0ZXYbuciadzEnT4mIM6pqd40u-Ao
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120fc458ff05a47d9085083b78c7465761bb9c89a7731274f898833aa6a778d2ef80a",
+      "host": "keybase.io",
+      "kid": "0120fc458ff05a47d9085083b78c7465761bb9c89a7731274f898833aa6a778d2ef80a",
+      "uid": "64832124c8ebc15b758d3dcb2000e619",
+      "username": "aj_holzer"
+    },
+    "merkle_root": {
+      "ctime": 1758480875,
+      "hash": "3e1c1513667685f40fb3660b13809cce1b8789111af0fd9344365a724ab34fe2782b3bd825cc25652b95980f8efe6e5c9bfbedbe9021554ab585aa417ae25277",
+      "hash_meta": "610e7ce52289dac1cd1f25852c044df2107cadb399ab19b072655a3ae4f018a7",
+      "seqno": 27108386
+    },
+    "service": {
+      "entropy": "LuMJ/kpC2dhK81uX7tmt+8Wg",
+      "hostname": "ajholzer.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.5.1"
+  },
+  "ctime": 1758480891,
+  "expire_in": 504576000,
+  "prev": "fe5fe1d774e682dcbf7dc682434ae2064befc1f30d536f35d082cef5622b914e",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg/EWP8FpH2QhQg7eMdGV2G7nImncxJ0+JiDOqaneNLvgKp3BheWxvYWTESpcCDMQg/l/h13Tmgty/fcaCQ0riBkvvwfMNU2810ILO9WIrkU7EILKDcrN9lF8c2ErZeYyVtbGmQCYnzpFucKgzsJ5pGYh/AgHCo3NpZ8RAZYEgMlmQPvWzOjHvpWU6N+FW4gKGSSDKec6dplqGVeCy015mdpFjzEcT7XGNzBcIOH1WPYL1eWN3yhxzE2sZAqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEILWhg/1jZkVc/Vy/oue3Tf1E3cc5TFsDhThKmMq2LVBPo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/aj_holzer
+
+==================================================================
