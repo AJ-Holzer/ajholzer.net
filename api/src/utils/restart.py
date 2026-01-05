@@ -22,7 +22,7 @@ def restart_api(delay: int) -> None:
 
         # Run restart script
         subprocess.run(
-            ["sudo", "/var/www/html/api.ajholzer.net_restart.sh"],
+            ["sudo", "/usr/bin/systemctl", "restart", "api.ajholzer.net"],
             check=True,
         )
 
