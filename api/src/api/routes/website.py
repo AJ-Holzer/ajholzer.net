@@ -10,6 +10,7 @@ import hashlib
 
 from fastapi import APIRouter, HTTPException, Request
 from config import config
+from utils.restart import restart_api
 
 
 router: APIRouter = APIRouter()
@@ -33,7 +34,6 @@ COMMANDS: list[list[str]] = [
         "-r",
         f"{API_PATH}/requirements.txt",
     ],
-    ["sudo", "systemctl", "restart", "api.ajholzer.net"],
 ]
 
 
@@ -79,6 +79,9 @@ async def update_site(request: Request) -> dict[str, str]:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
+
+        # Restart api
+        restart_api(delay=5)
 
         return {
             "status": "success",
