@@ -23,6 +23,8 @@ COMMANDS: list[list[str]] = [
     ["git", "-C", REPO_PATH, "reset", "--hard", "HEAD"],
     ["git", "-C", REPO_PATH, "clean", "-fd"],
     ["git", "-C", REPO_PATH, "pull", "origin", "main"],
+    ["rm -R .venv"],
+    ["pip3", "install", "-r", "ajholzer.net/api/requirements.txt"],
     ["sudo", "systemctl", "restart", "api.ajholzer.net"],
 ]
 
