@@ -9,6 +9,7 @@ import hmac
 import hashlib
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.concurrency import run_in_threadpool
 from config import config
 from utils.restart import restart_api
 
@@ -35,6 +36,16 @@ COMMANDS: list[list[str]] = [
         f"{API_PATH}/requirements.txt",
     ],
 ]
+
+
+def run_update() -> None:
+    for command in COMMANDS:
+        subprocess.run(
+            args=command,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
 
 @router.post(path="/update-site", response_model=dict[str, str])  # type: ignore
@@ -71,14 +82,8 @@ async def update_site(request: Request) -> dict[str, str]:
     try:
         print("🟠 Updating site data for ajholzer.net...")
 
-        # Run commands
-        for command in COMMANDS:
-            subprocess.run(
-                args=command,
-                check=True,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            )
+        # Update local data
+        await run_in_threadpool(run_update)
 
         # Restart api
         restart_api(delay=5)
