@@ -19,12 +19,20 @@ TAGS: list[str] = ["website"]
 # Path to your website Git repository
 REPO_PATH: str = "/var/www/html/ajholzer.net"
 
+# Repo and venv path
+VENV_PATH: str = "/var/www/venvs/api.ajholzer.net"
+API_PATH: str = "/var/www/html/ajholzer.net/api"
+
 COMMANDS: list[list[str]] = [
     ["git", "-C", REPO_PATH, "reset", "--hard", "HEAD"],
     ["git", "-C", REPO_PATH, "clean", "-fd"],
     ["git", "-C", REPO_PATH, "pull", "origin", "main"],
-    ["rm -R .venv"],
-    ["pip3", "install", "-r", "ajholzer.net/api/requirements.txt"],
+    [
+        f"{VENV_PATH}/bin/pip3",
+        "install",
+        "-r",
+        f"{API_PATH}/requirements.txt",
+    ],
     ["sudo", "systemctl", "restart", "api.ajholzer.net"],
 ]
 

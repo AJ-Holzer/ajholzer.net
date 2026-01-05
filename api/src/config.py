@@ -14,7 +14,9 @@ class Config:
     def __init__(self) -> None:
         """Loads the .env and .config file."""
         # Load .env file
-        dotenv.load_dotenv()
+        dotenv.load_dotenv(dotenv_path="../../../.env")
+
+        print(f"Looking for .env file in '{os.path.abspath('../../../.env')}'")
 
         # Define github config
         self.GITHUB_TOKEN: Optional[str] = os.getenv(key="GITHUB_TOKEN")
