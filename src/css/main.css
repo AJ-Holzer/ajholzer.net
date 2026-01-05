@@ -237,12 +237,17 @@ h3,
     align-self: center;
     font-weight: 600;
     opacity: 0.8;
-    white-space: nowrap;
     color: var(--accent);
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .project-description {
     color: var(--text);
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .project-commit-count {
@@ -250,12 +255,17 @@ h3,
     align-self: center;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .project-header * {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 0.5rem;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* Footer table */

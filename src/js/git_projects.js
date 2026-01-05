@@ -4,48 +4,8 @@
 // ========================= //
 
 document.addEventListener("DOMContentLoaded", () => {
-  const username = "AJ-Holzer";
   const container = document.querySelector("#projects-container");
-
-  /* -------------------------
-     Cache configuration
-  ------------------------- */
-  const CACHE_KEY = "github_projects_cache";
-  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
-
-  function shouldBypassCache() {
-    const nav = performance.getEntriesByType("navigation")[0];
-    const isReload = nav && nav.type === "reload";
-    const urlBypass = new URLSearchParams(window.location.search).has(
-      "nocache"
-    );
-    return isReload || urlBypass;
-  }
-
-  function getCachedData() {
-    try {
-      const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (!cached) return null;
-
-      if (Date.now() - cached.timestamp > CACHE_TTL) {
-        return null;
-      }
-
-      return cached.data;
-    } catch {
-      return null;
-    }
-  }
-
-  function setCachedData(data) {
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify({
-        timestamp: Date.now(),
-        data,
-      })
-    );
-  }
+  const API_URL = "https://api.ajholzer.net/github/projects";
 
   /* -------------------------
      Reveal system
@@ -107,12 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="project-commit-count">${commits}</div>
       </a>
-      `;
+    `;
 
     container.appendChild(row);
     observeReveal(row);
-
-    return row;
   }
 
   function renderPlaceholders() {
@@ -127,90 +85,31 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPlaceholders();
 
   /* -------------------------
-     Data loading (cache aware)
+     Data loading (API only)
   ------------------------- */
-  const bypassCache = shouldBypassCache();
-  const cachedData = !bypassCache ? getCachedData() : null;
-
-  if (cachedData) {
-    container.innerHTML = "";
-    renderHeader();
-
-    cachedData.forEach((repo) => {
-      createRow(repo.name, repo.description, repo.commits, repo.url);
-    });
-
-    return;
-  }
-
-  fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`
-  )
+  fetch(API_URL)
     .then((res) => {
-      if (!res.ok) throw new Error("GitHub API error");
+      if (!res.ok) throw new Error("API error");
       return res.json();
     })
-    .then(async (repos) => {
-      if (!Array.isArray(repos) || repos.length === 0) {
-        throw new Error("No repositories");
+    .then((projects) => {
+      if (!Array.isArray(projects) || projects.length === 0) {
+        throw new Error("No projects");
       }
 
       container.innerHTML = "";
       renderHeader();
 
-      const result = [];
-
-      for (const repo of repos) {
-        if (repo.name === username) continue;
-
-        const row = createRow(
-          repo.name,
-          repo.description,
-          "loading…",
-          repo.html_url
+      projects.forEach((project) => {
+        createRow(
+          project.name,
+          project.description,
+          project.commit_count ?? "—",
+          project.url
         );
-
-        const commits = await fetchCommitCount(username, repo.name, row, true);
-
-        result.push({
-          name: repo.name,
-          description: repo.description,
-          commits,
-          url: repo.html_url,
-        });
-      }
-
-      setCachedData(result);
+      });
     })
     .catch(() => {
       renderPlaceholders();
     });
 });
-
-/* -------------------------
-   Commit count fetcher
-------------------------- */
-function fetchCommitCount(owner, repo, row, returnCount = false) {
-  return fetch(
-    `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`
-  )
-    .then((res) => {
-      const link = res.headers.get("Link");
-      if (!link) return 1;
-
-      const match = link.match(/page=(\d+)>; rel="last"/);
-      return match ? Number(match[1]) : 1;
-    })
-    .then((count) => {
-      if (row) {
-        row.querySelector(".project-commit-count").textContent = count;
-      }
-      return returnCount ? count : undefined;
-    })
-    .catch(() => {
-      if (row) {
-        row.querySelector(".project-commit-count").textContent = "—";
-      }
-      return returnCount ? "—" : undefined;
-    });
-}

@@ -1,16 +1,19 @@
 {
-    "cSpell.words": [
-        "ajholzer",
-        "Cesario",
-        "Hühnchen",
-        "Keybase",
-        "Kufner",
-        "Louati",
-        "Momen",
-        "Nums",
-        "siteapp",
-        "vite",
-        "vitepress"
-    ],
-    "local-history.browser.descending": true
+  "cSpell.words": [
+    "ajholzer",
+    "Cesario",
+    "CHATLEX",
+    "Hühnchen",
+    "Keybase",
+    "Kufner",
+    "Louati",
+    "Momen",
+    "noopener",
+    "noreferrer",
+    "Nums",
+    "siteapp",
+    "vite",
+    "vitepress"
+  ],
+  "local-history.browser.descending": true
 }
