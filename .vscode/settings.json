@@ -13,7 +13,12 @@
     "Nums",
     "siteapp",
     "vite",
-    "vitepress"
+    "vitepress",
+    "digestmod",
+    "dotenv",
+    "fastapi",
+    "graphyql",
+    "uvicorn",
   ],
   "local-history.browser.descending": true
 }
