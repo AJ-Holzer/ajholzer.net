@@ -18,8 +18,8 @@ class API:
         """Initializes the API and registers all routes at _api/routes_."""
         # Init FastAPI
         self.__api: FastAPI = FastAPI(
-            title="ajholzer.net API",
-            version="1.0.0",
+            title=config.API_TITLE,
+            version=config.API_VERSION,
         )
 
         # Register routes

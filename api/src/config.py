@@ -43,6 +43,10 @@ class Config:
             "1",
         )
 
+        # API config
+        self.API_TITLE: str = "api.ajholzer.net"
+        self.API_VERSION: str = "1.0.0"
+
     def check(self) -> None:
         """Checks the config for missing values.
 

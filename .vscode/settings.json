@@ -3,6 +3,10 @@
     "ajholzer",
     "Cesario",
     "CHATLEX",
+    "digestmod",
+    "dotenv",
+    "fastapi",
+    "graphyql",
     "Hühnchen",
     "Keybase",
     "Kufner",
@@ -12,13 +16,10 @@
     "noreferrer",
     "Nums",
     "siteapp",
-    "vite",
-    "vitepress",
-    "digestmod",
-    "dotenv",
-    "fastapi",
-    "graphyql",
     "uvicorn",
+    "venv",
+    "vite",
+    "vitepress"
   ],
   "local-history.browser.descending": true
 }
