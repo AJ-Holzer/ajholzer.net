@@ -2,12 +2,16 @@
 
 from . import github
 from .github import list_projects
+from . import test
+from .test import test
 from . import website
 from .website import update_site
 
 __all__ = [
     "github",
+    "test",
     "website",
     "list_projects",
+    "test",
     "update_site",
 ]
