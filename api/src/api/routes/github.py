@@ -5,7 +5,7 @@
 
 
 from fastapi import APIRouter
-from api.models import Project
+from api.models import GitProject
 from integrations.github.fetcher import GithubFetcher
 
 
@@ -17,15 +17,15 @@ TAGS: list[str] = ["github"]
 github_fetcher: GithubFetcher = GithubFetcher()
 
 
-@router.get(path="/projects", response_model=list[Project])
-def list_projects() -> list[Project]:
+@router.get(path="/projects", response_model=list[GitProject])
+def list_projects() -> list[GitProject]:
     """Get github projects.
 
     Returns:
         list[Project]: The github projects.
     """
     return [
-        Project(
+        GitProject(
             url=project.url,
             name=project.name,
             description=project.description or "",

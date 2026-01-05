@@ -7,7 +7,7 @@
 from pydantic import BaseModel
 
 
-class Project(BaseModel):
+class GitProject(BaseModel):
     url: str
     name: str
     description: str
