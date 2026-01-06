@@ -7,15 +7,20 @@
 import importlib
 import pkgutil
 import uvicorn
+import logging
 
 from fastapi import FastAPI, APIRouter
 from typing import Optional
 from config import config
 
 
+logger: logging.Logger = logging.getLogger(name=__name__)
+
+
 class API:
     def __init__(self) -> None:
-        """Initializes the API and registers all routes at _api/routes_."""
+        """Initializes the API and registers all routes at api/routes."""
+        logging.debug("Initializing API...")
         # Init FastAPI
         self.__api: FastAPI = FastAPI(
             title=config.API_TITLE,
@@ -27,6 +32,7 @@ class API:
 
     def __register_routes(self) -> None:
         """Registers all routes in _api/routes/_"""
+        logger.info("Registering routes...")
         import api.routes
 
         for module_info in pkgutil.iter_modules(api.routes.__path__):
@@ -52,13 +58,17 @@ class API:
             self.__api.include_router(router=router, prefix=prefix, tags=tags)  # type: ignore
 
             # Log debug information
-            print(f"✅ Registered route: {prefix or '/'}")
+            logger.info("Registered route: '%s'", prefix)
 
     def start(self) -> None:
         """Starts the API."""
         # Log debug information
-        print(
-            f"🟠 Starting API: ip='{config.HOST_IP}', port={config.HOST_PORT}, auto-reload: {config.RELOAD_API}"
+        logger.info("Starting API...")
+        logger.debug(
+            "Using: ip='%s', port=%d, auto-reload: %s",
+            config.HOST_IP,
+            config.HOST_PORT,
+            config.RELOAD_API,
         )
 
         # Start api

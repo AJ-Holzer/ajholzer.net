@@ -4,11 +4,16 @@
 # ============================== #
 
 
+import logging
+
 from fastapi import APIRouter
 from api.models import GitProject
 from integrations.github.fetcher import GithubFetcher
 
 
+logger: logging.Logger = logging.getLogger(__name__)
+
+# Initialize router
 router: APIRouter = APIRouter()
 PREFIX: str = "/github"
 TAGS: list[str] = ["github"]
@@ -24,6 +29,7 @@ def list_projects() -> list[GitProject]:
     Returns:
         list[Project]: The github projects.
     """
+    logger.debug("Retrieving Github projects...")
     return [
         GitProject(
             url=project.url,

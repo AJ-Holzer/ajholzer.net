@@ -7,6 +7,7 @@
 import subprocess
 import hmac
 import hashlib
+import logging
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
@@ -14,6 +15,9 @@ from config import config
 from utils.restart import restart_api
 
 
+logger: logging.Logger = logging.getLogger(name=__name__)
+
+# Initialize router
 router: APIRouter = APIRouter()
 PREFIX: str = "/website"
 TAGS: list[str] = ["website"]
@@ -39,6 +43,7 @@ COMMANDS: list[list[str]] = [
 
 
 def run_update() -> None:
+    """Updates the site data for ajholzer.net."""
     for command in COMMANDS:
         subprocess.run(
             args=command,
@@ -48,7 +53,7 @@ def run_update() -> None:
         )
 
 
-@router.post(path="/update-site", response_model=dict[str, str])  # type: ignore
+@router.post(path="/update-site", response_model=dict[str, str])
 async def update_site(request: Request) -> dict[str, str]:
     """Update the website hosted at ajholzer.net.
 
@@ -58,29 +63,38 @@ async def update_site(request: Request) -> dict[str, str]:
     Returns:
         dict[str, str]: When the update was successfully.
     """
+    logger.debug("Attempting to update website and API hosted at ajholzer.net...")
+
     # Get the signature header from GitHub
+    logger.debug("Getting signature from Github...")
     signature = request.headers.get("X-Hub-Signature-256")
     if signature is None:
+        logger.warning("Missing signature!")
         raise HTTPException(status_code=403, detail="Missing signature")
 
     # Read the raw body for signature verification
     body = await request.body()
 
     # Compute HMAC with the secret
+    logger.debug("Computing secret using HMAC...")
     mac = hmac.new(config.GITHUB_WEBSITE_SECRET, msg=body, digestmod=hashlib.sha256)
     expected_signature = f"sha256={mac.hexdigest()}"
 
     # Compare the signature
+    logger.debug("Comparing signature...")
     if not hmac.compare_digest(expected_signature, signature):
+        logger.warning("Invalid signature!")
         raise HTTPException(status_code=403, detail="Invalid signature")
 
     # Optional: check event type if you want
+    logger.debug("Checking if event type matches PUSH event...")
     event_type = request.headers.get("X-GitHub-Event")
     if event_type != "push":
+        logger.warning("Not a PUSH event!")
         raise HTTPException(status_code=400, detail="Not a push event")
 
     try:
-        print("🟠 Updating site data for ajholzer.net...")
+        logger.debug("Updating site data for ajholzer.net...")
 
         # Update local data
         await run_in_threadpool(run_update)
@@ -88,15 +102,17 @@ async def update_site(request: Request) -> dict[str, str]:
         # Restart api
         restart_api(delay=5)
 
+        logger.debug("Site data updated for ajholzer.net.")
+
         return {
             "status": "success",
             "message": "Site updated",
         }
     except subprocess.CalledProcessError as exc:
         if exc.stdout:
-            print(exc.stdout.decode())
+            logger.error(exc.stdout.decode())
         if exc.stderr:
-            print(exc.stderr.decode())
+            logger.error(exc.stderr.decode())
 
         raise HTTPException(
             status_code=500,

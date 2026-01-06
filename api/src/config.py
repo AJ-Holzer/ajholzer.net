@@ -6,17 +6,43 @@
 
 import os
 import dotenv
+import logging
 
 from typing import Optional
+from pathlib import Path
+
+
+# Create logger
+logger: logging.Logger = logging.getLogger(name=__name__)
+
+
+# Define valid log levels
+NAME_TO_LEVEL = [
+    "CRITICAL",
+    "FATAL",
+    "ERROR",
+    "WARN",
+    "WARNING",
+    "INFO",
+    "DEBUG",
+    "NOTSET",
+]
 
 
 class Config:
     def __init__(self) -> None:
         """Loads the .env and .config file."""
         # Load .env file
-        dotenv.load_dotenv(dotenv_path="../../../.env")
+        logger.debug("Loading environment variables...")
+        dotenv.load_dotenv(dotenv_path=Path("..", "..", "..", ".env").resolve())
 
-        print(f"Looking for .env file in '{os.path.abspath('../../../.env')}'")
+        # Define logging config
+        self.LOGLEVEL: str = os.getenv(key="LOGLEVEL", default="INFO")
+        self.LOG_FILEPATH: Path = (
+            Path(os.getenv(key="LOG_FILEPATH", default="api.log"))
+            .expanduser()
+            .resolve()
+        )
 
         # Define github config
         self.GITHUB_TOKEN: Optional[str] = os.getenv(key="GITHUB_TOKEN")
@@ -53,16 +79,20 @@ class Config:
         Raises:
             ValueError: When a value is not specified for a config key.
         """
+        logger.debug("Checking config...")
         if not self.GITHUB_TOKEN:
-            raise ValueError("'GITHUB_TOKEN' must be specified in the .env file!")
+            logger.exception("'GITHUB_TOKEN' must be specified in the .env file!")
 
         if not self.GITHUB_USERNAME:
-            raise ValueError("'GITHUB_USERNAME' must be specified in the .env file!")
+            logger.exception("'GITHUB_USERNAME' must be specified in the .env file!")
 
         if not self.GITHUB_WEBSITE_SECRET:
-            raise ValueError(
+            logger.exception(
                 "'GITHUB_WEBSITE_SECRET' must be specified in the .env file!"
             )
+
+        if not self.LOGLEVEL.isdigit() and self.LOGLEVEL not in NAME_TO_LEVEL:
+            logger.exception(f"Invalid LOGLEVEL: {self.LOGLEVEL}")
 
 
 config = Config()

@@ -6,15 +6,20 @@
 
 import requests  # type: ignore[import-untyped]
 import time
+import logging
 
-from pprint import pprint
 from config import config
 from typing import Any, Optional
 from integrations.github.types import GithubProject
 
 
+logger: logging.Logger = logging.getLogger(name=__name__)
+
+
 class GithubFetcher:
     def __init__(self) -> None:
+        """Initializes the GithubFetcher."""
+        logger.debug(f"Initializing '{self.__class__.__name__}'...")
         self.__HEADERS: dict[str, str] = {
             "Authorization": f"Bearer {config.GITHUB_TOKEN}",
             "Accept": "application/vnd.github+json",
@@ -28,6 +33,7 @@ class GithubFetcher:
 
     def __get_repos(self) -> list[GithubProject]:
         """Fetch all repositories, sort by creation date descending, then take the configured max number."""
+        logger.debug("Fetching repositories from Github...")
         query: str = f"""
         {{
             user(login: "{config.GITHUB_USERNAME}") {{
@@ -105,8 +111,6 @@ class GithubFetcher:
         # Sort all repos by creation date descending
         all_repos_sorted = sorted(all_repos, key=lambda r: r["updatedAt"], reverse=True)
 
-        pprint(all_repos_sorted)
-
         # Take only the configured max number of repos
         selected_repos = all_repos_sorted[: config.GITHUB_MAX_REPOS]
 
@@ -135,6 +139,7 @@ class GithubFetcher:
         Returns:
             list[GithubProject]: The Github projects.
         """
+        logger.debug("Getting Github projects...")
         # Get current time in seconds since the last epoch
         current_time: float = time.time()
 
@@ -145,9 +150,16 @@ class GithubFetcher:
             > current_time
             and self.__projects
         ):
+            logger.debug(
+                "Using cached projects as they are still cached for %.2f seconds...",
+                self.__last_updated
+                + config.PROJECT_EXPIRATION_INTERVAL_MINUTES * 60
+                - current_time,
+            )
             return self.__projects
 
         # Update data
+        logger.debug("Updating cached Github projects...")
         self.__projects = self.__get_repos()
 
         # Update last update time

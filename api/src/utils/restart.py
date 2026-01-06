@@ -7,6 +7,10 @@
 import threading
 import subprocess
 import time
+import logging
+
+
+logger: logging.Logger = logging.getLogger(name=__name__)
 
 
 def restart_api(delay: int) -> None:
@@ -17,8 +21,12 @@ def restart_api(delay: int) -> None:
     """
 
     def restart() -> None:
+        logger.info(f"Restarting API in {delay} seconds...")
+
         # Wait a few seconds to ensure everything is done
         time.sleep(delay)
+
+        logger.info("Restarting API...")
 
         # Run restart script
         subprocess.run(
