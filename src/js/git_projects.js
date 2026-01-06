@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createRow(name, description, commits = "—", url = "#") {
     const row = document.createElement("div");
+    row.className = "reveal";
 
     row.innerHTML = `
       <a class="project" href="${url}" target="_blank" rel="noopener noreferrer">
