@@ -34,7 +34,7 @@ def setup_logging(loglevel: int | str, log_filepath: Path) -> None:
             "handlers": {
                 "console": {
                     "class": "logging.StreamHandler",
-                    "level": "DEBUG",
+                    "level": loglevel,
                     "formatter": "default",
                 },
                 "file": {
@@ -46,7 +46,7 @@ def setup_logging(loglevel: int | str, log_filepath: Path) -> None:
                 },
             },
             "root": {
-                "level": loglevel,
+                "level": "DEBUG",
                 "handlers": ["console", "file"],
             },
         }
