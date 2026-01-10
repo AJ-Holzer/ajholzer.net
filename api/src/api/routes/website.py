@@ -21,7 +21,7 @@ logger: logging.Logger = logging.getLogger(name=__name__)
 # Initialize router
 router: APIRouter = APIRouter()
 PREFIX: str = "/website"
-TAGS: list[str] = ["website"]
+TAGS: list[str] = ["website", "deployment"]
 
 # Path to your website Git repository
 REPO_PATH: str = "/var/www/html/ajholzer.net"
@@ -54,7 +54,7 @@ def run_update() -> None:
         )
 
 
-@router.post(path="/update-site", response_model=dict[str, str])
+@router.post(path="/ajholzer.net/deploy", response_model=dict[str, str])
 async def update_site(request: Request) -> dict[str, str]:
     """Updates the website hosted at ajholzer.net.
 
