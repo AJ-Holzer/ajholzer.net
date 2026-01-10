@@ -18,8 +18,8 @@ router: APIRouter = APIRouter()
 PREFIX: str = "/github"
 TAGS: list[str] = ["github"]
 
-# Initialize github fetcher
-github_fetcher: GitHub = GitHub()
+# Initialize github
+github: GitHub = GitHub()
 
 
 @router.get(path="/repositories", response_model=list[GitHubRepositoryModel])
@@ -37,5 +37,5 @@ def list_repositories() -> list[GitHubRepositoryModel]:
             description=repository.description or "",
             commit_count=repository.commit_count,
         )
-        for repository in github_fetcher.repositories
+        for repository in github.repositories
     ]
