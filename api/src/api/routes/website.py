@@ -13,6 +13,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from config import config
 from utils.restart import restart_api
+from typing import Optional
 
 
 logger: logging.Logger = logging.getLogger(name=__name__)
@@ -67,7 +68,7 @@ async def update_site(request: Request) -> dict[str, str]:
 
     # Get the signature header from GitHub
     logger.debug("Getting signature from GitHub...")
-    signature = request.headers.get("X-Hub-Signature-256")
+    signature: Optional[str] = request.headers.get("X-Hub-Signature-256")
     if signature is None:
         logger.warning("Missing signature!")
         raise HTTPException(status_code=403, detail="Missing signature")
@@ -77,8 +78,12 @@ async def update_site(request: Request) -> dict[str, str]:
 
     # Compute HMAC with the secret
     logger.debug("Computing secret using HMAC...")
-    mac = hmac.new(config.GITHUB_WEBSITE_SECRET, msg=body, digestmod=hashlib.sha256)
-    expected_signature = f"sha256={mac.hexdigest()}"
+    mac: hmac.HMAC = hmac.new(
+        config.GITHUB_WEBSITE_SECRET,
+        msg=body,
+        digestmod=hashlib.sha256,
+    )
+    expected_signature: str = f"sha256={mac.hexdigest()}"
 
     # Compare the signature
     logger.debug("Comparing signature...")
@@ -88,7 +93,7 @@ async def update_site(request: Request) -> dict[str, str]:
 
     # Optional: check event type if you want
     logger.debug("Checking if event type matches PUSH event...")
-    event_type = request.headers.get("X-GitHub-Event")
+    event_type: Optional[str] = request.headers.get("X-GitHub-Event")
     if event_type != "push":
         logger.warning("Not a PUSH event!")
         raise HTTPException(status_code=400, detail="Not a push event")
