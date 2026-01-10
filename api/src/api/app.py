@@ -17,6 +17,7 @@ from starlette.routing import BaseRoute
 from typing import Optional, Sequence, Any
 from enum import Enum
 from config import config
+from utils.paths import normalize_path
 
 
 logger: logging.Logger = logging.getLogger(name=__name__)
@@ -57,7 +58,9 @@ class API:
                 continue
 
             # Get route attributes
-            prefix: str = getattr(module, "PREFIX", "")
+            prefix: str = normalize_path(
+                path=f"{config.API_PREFIX}{getattr(module, 'PREFIX', '')}"
+            )
             tags: Optional[list[str | Enum]] = getattr(module, "TAGS", None)
             dependencies: Optional[Sequence[Depends]] = getattr(
                 module,
