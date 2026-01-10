@@ -18,7 +18,7 @@ logger: logging.Logger = logging.getLogger(name=__name__)
 
 class GitHub:
     def __init__(self) -> None:
-        """Initializes the GithubFetcher."""
+        """Initializes the GitHub class."""
         logger.debug(f"Initializing '{self.__class__.__name__}'...")
         self.__FETCH_REPO_HEADERS: dict[str, str] = {
             "Authorization": f"Bearer {config.GITHUB_TOKEN}",
@@ -33,10 +33,10 @@ class GitHub:
 
     def __fetch_repositories(self) -> list[GitHubRepository]:
         """Fetch all repositories, sort by creation date descending, then take the configured max number."""
-        logger.debug("Fetching repositories from Github...")
+        logger.debug("Fetching repositories from GitHub...")
         query: str = """
             {
-                user(login: "{github_username}") {
+                user(login: "{GitHub_username}") {
                     repositories(first: 100,{cursor_query} isFork: false) {
                         nodes {
                             name
@@ -136,9 +136,9 @@ class GitHub:
         """Returns the most resent repositories within the interval.
 
         Returns:
-            list[GithubProject]: The Github repositories.
+            list[GitHubRepository]: The GitHub repositories.
         """
-        logger.debug("Getting Github repositories...")
+        logger.debug("Getting GitHub repositories...")
 
         # Get current time in seconds since the last epoch
         current_time: float = time.time()
@@ -146,20 +146,20 @@ class GitHub:
         # Skip if repositories don't need to be updated (use cached repositories)
         if (
             self.__last_updated is not None
-            and self.__last_updated + config.PROJECT_EXPIRATION_INTERVAL_MINUTES * 60
+            and self.__last_updated + config.REPOSITORY_EXPIRATION_INTERVAL_MINUTES * 60
             > current_time
             and self.__cached_repositories
         ):
             logger.debug(
                 "Using cached repositories as they are still cached for %.2f seconds...",
                 self.__last_updated
-                + config.PROJECT_EXPIRATION_INTERVAL_MINUTES * 60
+                + config.REPOSITORY_EXPIRATION_INTERVAL_MINUTES * 60
                 - current_time,
             )
             return self.__cached_repositories
 
         # Update cached repositories
-        logger.debug("Updating cached Github repositories...")
+        logger.debug("Updating cached GitHub repositories...")
         self.__cached_repositories = self.__fetch_repositories()
 
         # Update last update time

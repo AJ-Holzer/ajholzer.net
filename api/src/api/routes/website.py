@@ -55,7 +55,7 @@ def run_update() -> None:
 
 @router.post(path="/update-site", response_model=dict[str, str])
 async def update_site(request: Request) -> dict[str, str]:
-    """Update the website hosted at ajholzer.net.
+    """Updates the website hosted at ajholzer.net.
 
     Raises:
         HTTPException: When the update fails.
@@ -66,7 +66,7 @@ async def update_site(request: Request) -> dict[str, str]:
     logger.debug("Attempting to update website and API hosted at ajholzer.net...")
 
     # Get the signature header from GitHub
-    logger.debug("Getting signature from Github...")
+    logger.debug("Getting signature from GitHub...")
     signature = request.headers.get("X-Hub-Signature-256")
     if signature is None:
         logger.warning("Missing signature!")

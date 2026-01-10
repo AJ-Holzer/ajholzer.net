@@ -1,7 +1,7 @@
 # Auto-generated __init__.py
 
 from . import github
-from .github import list_projects
+from .github import list_repositories
 from . import test
 from .test import test
 from . import website
@@ -12,7 +12,7 @@ __all__ = [
     "github",
     "test",
     "website",
-    "list_projects",
+    "list_repositories",
     "run_update",
     "test",
     "update_site",

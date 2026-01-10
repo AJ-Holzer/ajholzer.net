@@ -22,20 +22,20 @@ TAGS: list[str] = ["github"]
 github_fetcher: GitHub = GitHub()
 
 
-@router.get(path="/projects", response_model=list[GitHubRepositoryModel])
-def list_projects() -> list[GitHubRepositoryModel]:
-    """Get github projects.
+@router.get(path="/repositories", response_model=list[GitHubRepositoryModel])
+def list_repositories() -> list[GitHubRepositoryModel]:
+    """Get GitHub repositories.
 
     Returns:
-        list[Project]: The github projects.
+        list[Repository]: The GitHub repositories.
     """
-    logger.debug("Retrieving Github projects...")
+    logger.debug("Retrieving GitHub repositories...")
     return [
         GitHubRepositoryModel(
-            url=project.url,
-            name=project.name,
-            description=project.description or "",
-            commit_count=project.commit_count,
+            url=repository.url,
+            name=repository.name,
+            description=repository.description or "",
+            commit_count=repository.commit_count,
         )
-        for project in github_fetcher.repositories
+        for repository in github_fetcher.repositories
     ]

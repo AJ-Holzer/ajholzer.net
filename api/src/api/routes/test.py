@@ -19,5 +19,10 @@ TAGS: list[str] = ["test"]
 
 @router.get(path="", response_model=dict[str, str])
 def test() -> dict[str, str]:
+    """Simple API test.
+
+    Returns:
+        dict[str, str]: Whether the API test was successful.
+    """
     logger.debug("API test successful!")
     return {"status": "OK"}

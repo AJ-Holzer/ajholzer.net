@@ -44,7 +44,7 @@ class Config:
             .resolve()
         )
 
-        # Define github config
+        # Define GitHub config
         self.GITHUB_TOKEN: Optional[str] = os.getenv(key="GITHUB_TOKEN")
         self.GITHUB_USERNAME: Optional[str] = os.getenv(key="GITHUB_USERNAME")
         self.GITHUB_MAX_REPOS: int = int(os.getenv(key="GITHUB_MAX_REPOS", default=20))
@@ -54,9 +54,9 @@ class Config:
         ).encode()
 
         # Expiration config
-        self.PROJECT_EXPIRATION_INTERVAL_MINUTES: int = int(
+        self.REPOSITORY_EXPIRATION_INTERVAL_MINUTES: int = int(
             os.getenv(
-                key="PROJECT_EXPIRATION_INTERVAL_MINUTES",
+                key="REPOSITORY_EXPIRATION_INTERVAL_MINUTES",
                 default=60,
             )
         )

@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#projects-container");
-  const API_URL = "https://api.ajholzer.net/github/projects";
+  const API_URL = "https://api.ajholzer.net/github/repositories";
 
   /* -------------------------
      Reveal system
@@ -93,20 +93,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) throw new Error("API error");
       return res.json();
     })
-    .then((projects) => {
-      if (!Array.isArray(projects) || projects.length === 0) {
-        throw new Error("No projects");
+    .then((repositories) => {
+      if (!Array.isArray(repositories) || repositories.length === 0) {
+        throw new Error("No repositories");
       }
 
       container.innerHTML = "";
       renderHeader();
 
-      projects.forEach((project) => {
+      repositories.forEach((repository) => {
         createRow(
-          project.name,
-          project.description,
-          project.commit_count ?? "—",
-          project.url
+          repository.name,
+          repository.description,
+          repository.commit_count ?? "—",
+          repository.url
         );
       });
     })
