@@ -7,7 +7,7 @@
 from pydantic import BaseModel
 
 
-class GitProject(BaseModel):
+class GitHubRepositoryModel(BaseModel):
     url: str
     name: str
     description: str

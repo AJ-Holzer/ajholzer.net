@@ -7,7 +7,7 @@
 import logging
 
 from fastapi import APIRouter
-from api.models import GitProject
+from api.models import GitHubRepositoryModel
 from api.src.integrations.github.github_interface import GitHub
 
 
@@ -22,8 +22,8 @@ TAGS: list[str] = ["github"]
 github_fetcher: GitHub = GitHub()
 
 
-@router.get(path="/projects", response_model=list[GitProject])
-def list_projects() -> list[GitProject]:
+@router.get(path="/projects", response_model=list[GitHubRepositoryModel])
+def list_projects() -> list[GitHubRepositoryModel]:
     """Get github projects.
 
     Returns:
@@ -31,7 +31,7 @@ def list_projects() -> list[GitProject]:
     """
     logger.debug("Retrieving Github projects...")
     return [
-        GitProject(
+        GitHubRepositoryModel(
             url=project.url,
             name=project.name,
             description=project.description or "",

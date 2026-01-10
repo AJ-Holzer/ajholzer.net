@@ -10,7 +10,12 @@ import uvicorn
 import logging
 
 from fastapi import FastAPI, APIRouter
-from typing import Optional
+from fastapi.params import Depends
+from fastapi.datastructures import Default
+from starlette.responses import Response, JSONResponse
+from starlette.routing import BaseRoute
+from typing import Optional, Sequence, Any
+from enum import Enum
 from config import config
 
 
@@ -21,6 +26,7 @@ class API:
     def __init__(self) -> None:
         """Initializes the API and registers all routes at api/routes."""
         logging.debug("Initializing API...")
+
         # Init FastAPI
         self.__api: FastAPI = FastAPI(
             title=config.API_TITLE,
@@ -50,12 +56,40 @@ class API:
             if router is None:
                 continue
 
-            # Get prefix and tags
+            # Get route attributes
             prefix: str = getattr(module, "PREFIX", "")
-            tags: list[str] = getattr(module, "TAGS", [])
+            tags: Optional[list[str | Enum]] = getattr(module, "TAGS", None)
+            dependencies: Optional[Sequence[Depends]] = getattr(
+                module,
+                "DEPENDENCIES",
+                None,
+            )
+            responses: Optional[dict[int | str, dict[str, Any]]] = getattr(
+                module,
+                "RESPONSES",
+                None,
+            )
+            deprecated: Optional[bool] = getattr(module, "DEPRECATED", None)
+            include_in_schema: bool = getattr(module, "INCLUDE_IN_SCHEMA", True)
+            default_response_class: type[Response] = getattr(
+                module,
+                "DEFAULT_RESPONSE_CLASS",
+                Default(JSONResponse),
+            )
+            callbacks: Optional[list[BaseRoute]] = getattr(module, "CALLBACKS", None)
 
             # Add route to router
-            self.__api.include_router(router=router, prefix=prefix, tags=tags)  # type: ignore
+            self.__api.include_router(
+                router=router,
+                prefix=prefix,
+                tags=tags,
+                dependencies=dependencies,
+                responses=responses,
+                deprecated=deprecated,
+                include_in_schema=include_in_schema,
+                default_response_class=default_response_class,
+                callbacks=callbacks,
+            )
 
             # Log debug information
             logger.info("Registered route: '%s'", prefix)

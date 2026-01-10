@@ -3,7 +3,7 @@
 from . import app
 from .app import API
 from . import models
-from .models import GitProject
+from .models import GitHubRepositoryModel
 from . import routes
 
 __all__ = [
@@ -11,5 +11,5 @@ __all__ = [
     "models",
     "routes",
     "API",
-    "GitProject",
+    "GitHubRepositoryModel",
 ]
