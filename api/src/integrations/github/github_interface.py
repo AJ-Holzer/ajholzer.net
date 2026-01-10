@@ -35,31 +35,31 @@ class GitHub:
         """Fetch all repositories, sort by creation date descending, then take the configured max number."""
         logger.debug("Fetching repositories from GitHub...")
         query: str = """
-            {
-                user(login: "{github_username}") {
-                    repositories(first: 100,{cursor_query} isFork: false) {
-                        nodes {
+            {{
+                user(login: "{github_username}") {{
+                    repositories(first: 100,{cursor_query} isFork: false) {{
+                        nodes {{
                             name
                             url
                             description
                             updatedAt
-                            defaultBranchRef {
-                                target {
-                                    ... on Commit {
-                                        history {
+                            defaultBranchRef {{
+                                target {{
+                                    ... on Commit {{
+                                        history {{
                                             totalCount
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        pageInfo {
+                                        }}
+                                    }}
+                                }}
+                            }}
+                        }}
+                        pageInfo {{
                             hasNextPage
                             endCursor
-                        }
-                    }
-                }
-            }
+                        }}
+                    }}
+                }}
+            }}
         """
 
         all_repos: list[dict[str, Any]] = []
