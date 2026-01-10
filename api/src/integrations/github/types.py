@@ -9,7 +9,7 @@ from typing import Optional
 
 
 @dataclass
-class GithubProject:
+class GitHubRepository:
     url: str
     name: str
     description: Optional[str]

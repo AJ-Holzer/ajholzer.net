@@ -17,7 +17,7 @@ logger: logging.Logger = logging.getLogger(name=__name__)
 
 
 # Define valid log levels
-NAME_TO_LEVEL = [
+NAME_TO_LEVEL: list[str] = [
     "CRITICAL",
     "FATAL",
     "ERROR",

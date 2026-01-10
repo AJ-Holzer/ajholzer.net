@@ -9,6 +9,7 @@ import logging
 from utils.logging import setup_logging, setup_bootstrap_logging
 from api.app import API
 
+
 logger: logging.Logger = logging.getLogger(name=__name__)
 
 

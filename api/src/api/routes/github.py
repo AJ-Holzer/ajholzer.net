@@ -8,7 +8,7 @@ import logging
 
 from fastapi import APIRouter
 from api.models import GitProject
-from integrations.github.fetcher import GithubFetcher
+from api.src.integrations.github.github_interface import GitHub
 
 
 logger: logging.Logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ PREFIX: str = "/github"
 TAGS: list[str] = ["github"]
 
 # Initialize github fetcher
-github_fetcher: GithubFetcher = GithubFetcher()
+github_fetcher: GitHub = GitHub()
 
 
 @router.get(path="/projects", response_model=list[GitProject])
@@ -37,5 +37,5 @@ def list_projects() -> list[GitProject]:
             description=project.description or "",
             commit_count=project.commit_count,
         )
-        for project in github_fetcher.projects
+        for project in github_fetcher.repositories
     ]

@@ -1,13 +1,13 @@
 # Auto-generated __init__.py
 
-from . import fetcher
-from .fetcher import GithubFetcher
+from . import github_interface
+from .github_interface import GitHub
 from . import types
-from .types import GithubProject
+from .types import GitHubRepository
 
 __all__ = [
-    "fetcher",
+    "github_interface",
     "types",
-    "GithubFetcher",
-    "GithubProject",
+    "GitHub",
+    "GitHubRepository",
 ]
