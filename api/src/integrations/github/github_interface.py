@@ -36,7 +36,7 @@ class GitHub:
         logger.debug("Fetching repositories from GitHub...")
         query: str = """
             {
-                user(login: "{GitHub_username}") {
+                user(login: "{github_username}") {
                     repositories(first: 100,{cursor_query} isFork: false) {
                         nodes {
                             name
