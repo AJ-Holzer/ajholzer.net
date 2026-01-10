@@ -5,6 +5,7 @@ from .github import list_projects
 from . import test
 from .test import test
 from . import website
+from .website import run_update
 from .website import update_site
 
 __all__ = [
@@ -12,6 +13,7 @@ __all__ = [
     "test",
     "website",
     "list_projects",
+    "run_update",
     "test",
     "update_site",
 ]
