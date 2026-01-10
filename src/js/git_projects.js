@@ -5,7 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#projects-container");
-  const API_URL = "https://api.ajholzer.net/github/repositories";
+  const API_URL = "https://api.ajholzer.net/api/github/repositories";
 
   /* -------------------------
      Reveal system
