@@ -8,7 +8,7 @@ import logging
 
 from fastapi import APIRouter
 from api.models import GitHubRepositoryModel
-from api.src.integrations.github.github_interface import GitHub
+from integrations.github.github_interface import GitHub
 
 
 logger: logging.Logger = logging.getLogger(__name__)
