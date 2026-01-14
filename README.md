@@ -1,4 +1,4 @@
-# ajholzer.net
+# [ajholzer.net](https://ajholzer.net)
 
 ## ⚖️ License
 
