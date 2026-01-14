@@ -22,6 +22,5 @@
     "venv",
     "vite",
     "vitepress"
-  ],
-  "local-history.browser.descending": true
+  ]
 }
