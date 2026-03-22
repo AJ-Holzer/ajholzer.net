@@ -48,6 +48,16 @@ footer {
     box-shadow: 4px 0 20px var(--box-shadow-color);
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Disclaimer */
+#disclaimer {
+    color: var(--text-dark-gray);
+    width: 100%;
+    text-align: center;
 }
 
 /* Make headings slightly heavier */
@@ -95,7 +105,7 @@ h3,
 
 .navbar nav a {
     margin-left: 2rem;
-    color: var(--text-muted);
+    color: var(--text-gray);
     text-decoration: none;
     transition: color 0.2s ease;
 }
@@ -116,7 +126,7 @@ h3,
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--text-muted);
+    background: var(--text-gray);
     margin: 5px 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -167,7 +177,7 @@ h3,
 }
 
 .hero-text .subtle {
-    color: var(--text-muted);
+    color: var(--text-gray);
 }
 
 .social-links {
@@ -176,7 +186,7 @@ h3,
 }
 
 .social-links a {
-    color: var(--text-muted);
+    color: var(--text-gray);
     font-size: 2rem;
     transition: transform 0.25s ease, color 0.25s ease;
 }
@@ -253,7 +263,7 @@ h3,
 .project-commit-count {
     text-align: right;
     align-self: center;
-    color: var(--text-muted);
+    color: var(--text-gray);
     font-variant-numeric: tabular-nums;
     white-space: normal;
     word-break: break-word;
@@ -288,12 +298,12 @@ footer table thead th {
 
 footer table tbody td {
     padding: 0.5rem 0;
-    color: var(--text-muted);
+    color: var(--text-gray);
     vertical-align: top;
 }
 
 footer table tbody td a {
-    color: var(--text-muted);
+    color: var(--text-gray);
     text-decoration: none;
     transition: color 0.2s ease;
 }
