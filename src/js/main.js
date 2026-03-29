@@ -143,3 +143,8 @@ function animate(now) {
 }
 
 requestAnimationFrame(animate);
+
+// ==========================
+// CURRENT YEAR
+// ==========================
+document.getElementById("year").innerHTML = new Date().getFullYear();
