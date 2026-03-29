@@ -59,6 +59,11 @@
         transform: translateX(-100%);
     }
 
+    /* Keep accent color if active */
+    a.animated.active {
+        color: var(--accent);
+    }
+
     /* Navbar */
     .navbar nav a:hover {
         color: var(--accent);
