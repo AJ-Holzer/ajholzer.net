@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   );
 
   function observeReveal(el) {
@@ -43,19 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------------
-     Placeholder projects
+     Update projects placeholder
   ------------------------- */
-  const PLACEHOLDERS = [
-    {
-      name: "Debbie",
-      description: "Quadrupedal robot with encrypted WiFi control.",
-    },
-    {
-      name: "CHATLEX",
-      description: "Secure messaging application with local encryption.",
-    },
-  ];
-
   function createRow(name, description, commits = "—", url = "#") {
     const row = document.createElement("div");
     row.className = "reveal";
@@ -75,9 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderPlaceholders() {
-    container.innerHTML = "";
-    renderHeader();
-    PLACEHOLDERS.forEach((p) => createRow(p.name, p.description, "—"));
+    container.innerHTML =
+      '<span style="font-style: italic;">Updating projects...</span>';
   }
 
   /* -------------------------
@@ -106,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
           repository.name,
           repository.description,
           repository.commit_count ?? "—",
-          repository.url
+          repository.url,
         );
       });
     })
