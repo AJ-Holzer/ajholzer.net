@@ -1,0 +1,9 @@
+/* Mozilla Browsers */
+::-moz-selection {
+    background: var(--glow);
+}
+
+/* Other Browsers */
+::selection {
+    background: var(--glow);
+}

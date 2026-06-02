@@ -1,0 +1,56 @@
+footer {
+    padding: 1rem 5vw;
+    background: var(--transparent-background-color);
+    box-shadow: 4px 0 20px var(--box-shadow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Footer table */
+footer table {
+    border-collapse: separate;
+    border-spacing: 3rem 0;
+    width: 100%;
+    max-width: 50%;
+}
+
+footer table thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: larger;
+    color: var(--accent);
+    opacity: 0.6;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+footer table tbody td {
+    padding: 0.5rem 0;
+    color: var(--text-gray);
+    vertical-align: top;
+}
+
+footer table tbody td a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer table tbody tr {
+    transition: background-color 0.25s ease;
+    border-radius: 0.3rem;
+}
+
+/* Phone view */
+@media (max-width: 768px) {
+
+    /* Footer table */
+    footer table {
+        border-spacing: 1rem 0.5rem;
+        width: 100%;
+        max-width: 100%;
+    }
+}
